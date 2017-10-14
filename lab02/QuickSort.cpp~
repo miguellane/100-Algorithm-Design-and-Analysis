@@ -1,0 +1,60 @@
+
+#include <iostream>
+#include <stdlib.h>
+#include <string>
+
+using namespace std;
+
+void quickSort( int *array, int arraySize) {
+  int halfSize = arraySize/2;
+  int endSize = arraySize - halfSize;
+  int pivot = array[halfSize];
+  int i = 0;
+  int j = arraySize-1;
+  while(i < j){
+    
+    while(array[i] < pivot)
+      i++;
+    while(array[j] > pivot)
+      j--;
+    int temp = array[i];
+    array[i] = array[j];
+    array[j] = temp;
+    i++;
+    j--;
+  }
+  if(halfSize != 0)
+    quickSort(array, halfSize);
+  if(endSize != 0)
+    quickSort(array+halfSize,endSize);
+  cout<<i<<endl;
+  cout<<j<<endl;
+  cout<<endl;
+}
+
+
+int main(int argc,char **argv) {
+
+  int *Sequence;
+  int arraySize;
+
+  // Get the size of the sequence
+  cin >> arraySize;
+
+  // Allocate enough memory to store "arraySize" integers
+  Sequence = new int[arraySize];
+    
+  // Read in the sequence
+  for ( int i=0; i<arraySize; i++ )
+    cin >> Sequence[i];
+
+  // Run your algorithms to manipulate the elements in Sequence
+  quickSort(Sequence, arraySize); 
+    
+  // Output the result
+  for(int i=0; i<arraySize; i++)
+      cout << Sequence[i] << endl;
+    
+  // Free allocated space
+  delete[] Sequence;
+}
